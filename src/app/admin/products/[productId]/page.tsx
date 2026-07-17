@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { products } from '@/lib/data/products';
+import ImagePicker from '@/components/ImagePicker';
 export default function EditProduct() {
   const id = String(useParams().productId || '');
   const p = products.find((x) => x.id === id);
@@ -18,6 +19,7 @@ export default function EditProduct() {
             <div><label className="lbl" style={{ marginTop: 0 }}>Type</label><input className="field" defaultValue={p.type} /></div>
             <div><label className="lbl" style={{ marginTop: 0 }}>Price (from) €</label><input type="number" step="0.01" className="field" defaultValue={p.priceFrom} /></div>
           </div>
+          <ImagePicker label="Product photo" initial={p.image} />
           <div><label className="lbl" style={{ marginTop: 0 }}>Description</label><textarea className="field" style={{ minHeight: 100 }} defaultValue={p.description} /></div>
           <label style={{ display: 'flex', gap: 8, color: 'var(--muted)', fontSize: 14 }}><input type="checkbox" defaultChecked={p.featured} /> Featured on homepage</label>
           <label style={{ display: 'flex', gap: 8, color: 'var(--muted)', fontSize: 14 }}><input type="checkbox" defaultChecked={p.available} /> Available (in stock)</label>

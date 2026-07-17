@@ -15,12 +15,26 @@ export default function Checkout() {
   const delivery = method === 'delivery' && items.length ? site.deliveryFee : 0;
   const total = subtotal + delivery;
   if (ready && !items.length) return <div className="wrap"><div className="empty">Your cart is empty. <Link href="/shop" style={{ color: 'var(--gold-ink)' }}>Browse flowers →</Link></div></div>;
-  function submit(e: React.FormEvent<HTMLFormElement>) {
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (busy || !items.length) return;
     setBusy(true);
     const f = new FormData(e.currentTarget);
     const g = (k: string) => String(f.get(k) || '');
+    // Card payment via Stripe — active when NEXT_PUBLIC_STRIPE_ENABLED=true and keys are set.
+    if (process.env.NEXT_PUBLIC_STRIPE_ENABLED === 'true') {
+      try {
+        const res = await fetch('/api/checkout', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            items: items.map((i) => ({ name: i.name, variant: i.variant, price: i.price, qty: i.qty })),
+            deliveryFee: delivery, successUrl: window.location.origin + '/track-order', cancelUrl: window.location.origin + '/checkout',
+          }),
+        });
+        const data = await res.json();
+        if (data.url) { window.location.href = data.url; return; }
+      } catch { /* fall through to demo order */ }
+    }
     const order = createOrder({
       customerName: `${g('fn')} ${g('ln')}`.trim(), customerEmail: g('email'), customerPhone: g('phone'),
       recipientName: method === 'pickup' ? `${g('fn')} ${g('ln')}`.trim() : g('rcpt'),
@@ -67,7 +81,7 @@ export default function Checkout() {
           {items.map((it, ix) => <div className="r" key={ix}><span>{it.qty}× {it.name} ({it.variant})</span><span>{euro(it.price * it.qty)}</span></div>)}
           <div className="r"><span>Delivery</span><span>{euro(delivery)}</span></div>
           <div className="r total"><span>Total</span><span>{euro(total)}</span></div>
-          <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', marginTop: 12 }}>🔒 No card is charged in this demo</p>
+          <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', marginTop: 12 }}>🔒 Secure card payment with Stripe when enabled — otherwise this demo places the order directly.</p>
         </div></div>
       </div>
     </div>

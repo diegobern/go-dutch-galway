@@ -17,7 +17,7 @@ export default function AdminOrders() {
   const rows = orders.filter((o) => (fil === 'all' || o.status === fil) && (!q || (o.id + o.customerName + o.recipientName).toLowerCase().includes(q.toLowerCase())));
   return (
     <>
-      <div className="adm-h"><div><h1>Orders</h1><p>Manage, update status and track every order.</p></div><button className="adm-btn o" onClick={() => alert('Demo: exports all orders to CSV in production.')}>⭳ Export CSV</button></div>
+      <div className="adm-h"><div><h1>Orders</h1><p>Change a status from the dropdown — it colours instantly, and delivered orders get a ✓.</p></div><button className="adm-btn o" onClick={() => alert('Demo: exports all orders to CSV in production.')}>⭳ Export CSV</button></div>
       <div className="tools">
         {FILTERS.map((f) => <button key={f.k} className={'chip' + (fil === f.k ? ' on' : '')} onClick={() => setFil(f.k)}>{f.label}</button>)}
         <input className="field" style={{ maxWidth: 220, marginLeft: 'auto' }} placeholder="Search…" value={q} onChange={(e) => setQ(e.target.value)} />
@@ -33,7 +33,12 @@ export default function AdminOrders() {
               <td>{o.deliveryDate || '—'}</td>
               <td><b>{euro(o.total)}</b></td>
               <td><span className={'pill ' + (o.paymentStatus.startsWith('Paid') ? 'st-out' : 'st-prep')}>{o.paymentStatus}</span></td>
-              <td><select className="stsel" value={o.status} onChange={(e) => change(o.id, e.target.value as OrderStatus)}>{Object.entries(STATUS_LABELS).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}</select></td>
+              <td style={{ whiteSpace: 'nowrap' }}>
+                <select className={'stsel ' + STATUS_LABELS[o.status].cls} value={o.status} onChange={(e) => change(o.id, e.target.value as OrderStatus)}>
+                  {Object.entries(STATUS_LABELS).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
+                </select>
+                {o.status === 'done' && <span className="tick-done" title="Delivered">✓</span>}
+              </td>
               <td><Link className="iconbtn2" href={`/admin/orders/${o.id}`}>Open</Link></td>
             </tr>
           ))}

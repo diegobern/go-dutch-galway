@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { categories as seed } from '@/lib/data/categories';
 import { products } from '@/lib/data/products';
+import ImagePicker from '@/components/ImagePicker';
 export default function AdminCategories() {
   const [list, setList] = useState(seed.map((c) => ({ ...c })));
   const [name, setName] = useState('');
@@ -20,8 +21,10 @@ export default function AdminCategories() {
           ))}</tbody>
         </table></div>
         <form className="adm-box" onSubmit={add}><h3>Add category</h3>
+          <label className="lbl" style={{ marginTop: 0 }}>Name</label>
           <input className="field" placeholder="Category name" value={name} onChange={(e) => setName(e.target.value)} />
-          <button className="adm-btn" style={{ marginTop: 12 }} type="submit">Add category</button>
+          <div style={{ marginTop: 12 }}><ImagePicker label="Category photo" /></div>
+          <button className="adm-btn" style={{ marginTop: 14 }} type="submit">Add category</button>
           <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 10 }}>Demo: added to this session. With Firebase, it persists and appears in the menus.</p>
         </form>
       </div>

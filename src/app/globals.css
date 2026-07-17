@@ -219,3 +219,10 @@ legend{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--g
   .grid-2{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* --- floating WhatsApp button (public site) --- */
+.wa-float{position:fixed;left:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.4);z-index:75;transition:.25s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:30px;height:30px}
+/* move demo badge to the right so it doesn't cover WhatsApp */
+.demo-badge{left:auto;right:14px}

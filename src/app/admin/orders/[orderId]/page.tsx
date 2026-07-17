@@ -17,10 +17,11 @@ export default function OrderDetail() {
     <>
       <div className="adm-h"><div><Link href="/admin/orders" style={{ fontSize: 13, color: 'var(--muted)' }}>← Orders</Link><h1>{o.id}</h1><p>Placed {o.createdAt} · {o.method === 'pickup' ? 'Store pickup' : 'Delivery'}</p></div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <span className={'pill ' + STATUS_LABELS[o.status].cls}>{STATUS_LABELS[o.status].label}</span>
-          <select className="stsel" value={o.status} onChange={(e) => set(e.target.value as OrderStatus)}>{Object.entries(STATUS_LABELS).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}</select>
+          <span className={'pill ' + STATUS_LABELS[o.status].cls}>{o.status === 'done' ? '✓ ' : ''}{STATUS_LABELS[o.status].label}</span>
+          <select className={'stsel ' + STATUS_LABELS[o.status].cls} value={o.status} onChange={(e) => set(e.target.value as OrderStatus)}>{Object.entries(STATUS_LABELS).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}</select>
         </div>
       </div>
+      {o.status === 'done' && <div className="alert" style={{ background: '#e0f2ec', borderColor: '#bfe3d7', color: '#1f8a70', marginBottom: 16 }}>✓ This order has been delivered.</div>}
       <div className="adm-2">
         <div className="adm-box"><h3>Items</h3>
           {o.items.map((it, ix) => <div key={ix} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--line)' }}><span>{it.qty}× {it.name} <span style={{ color: 'var(--muted)' }}>({it.variant})</span></span><b>{euro(it.price * it.qty)}</b></div>)}
@@ -42,7 +43,7 @@ export default function OrderDetail() {
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               <button className="adm-btn" onClick={() => set('prep')}>Mark preparing</button>
               <button className="adm-btn" onClick={() => set('out')}>Out for delivery</button>
-              <button className="adm-btn" onClick={() => set('done')}>Mark delivered</button>
+              <button className="adm-btn" style={{ background: '#1f8a70' }} onClick={() => set('done')}>✓ Mark delivered</button>
               <button className="adm-btn o" onClick={() => { if (confirm('Cancel this order?')) set('cancel'); }}>Cancel</button>
               <button className="adm-btn o" onClick={() => window.print()}>Print docket</button>
             </div>

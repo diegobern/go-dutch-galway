@@ -167,3 +167,33 @@ godutch/
 ├─ next.config.mjs
 └─ package.json
 ```
+
+## Card payments (Stripe) — how to turn it on
+
+Card payments are wired and **OFF by default** (the demo places orders directly).
+To accept real cards and receive the money in your bank account:
+
+1. Create a **Stripe** account at stripe.com, add your business details and your
+   **bank account (IBAN)** under Settings → Payouts (Stripe pays out automatically).
+2. In **Vercel → your project → Settings → Environment Variables**, add:
+   - `NEXT_PUBLIC_STRIPE_ENABLED` = `true`
+   - `STRIPE_SECRET_KEY` = `sk_live_...`  (Stripe → Developers → API keys)
+   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` = `pk_live_...`
+   - `STRIPE_WEBHOOK_SECRET` = `whsec_...`  (from the webhook in step 3)
+3. In **Stripe → Developers → Webhooks**, add an endpoint to
+   `https://YOUR-SITE/api/stripe-webhook`, event `checkout.session.completed`,
+   and copy its signing secret into `STRIPE_WEBHOOK_SECRET`.
+4. Redeploy. Checkout now sends customers to Stripe's secure card page; the money
+   lands in your bank and the webhook confirms payment. Card data never touches
+   this app (PCI handled by Stripe).
+
+Files: `src/app/api/checkout/route.ts` (creates the payment) and
+`src/app/api/stripe-webhook/route.ts` (confirms it). For persistent paid orders,
+connect Firebase (see `/firebase-integration`) and save the order in the webhook.
+
+## What's new in this update
+- Admin status dropdowns **colour by status**; delivered orders show a green **✓**.
+- Add/Edit product and Add category now include a **photo picker** (live preview;
+  real upload via Firebase Storage in production).
+- Floating **WhatsApp** button (bottom-left) on the public site.
+- **Card payments (Stripe)** wired and ready — off until you add the keys above.
