@@ -1,0 +1,73 @@
+.admin{display:grid;grid-template-columns:248px 1fr;min-height:100vh;background:#f3f0e8}
+.admin-side{background:var(--brand-900);color:#d9e2d6;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.admin-logo{font-family:var(--serif);font-size:23px;font-weight:600;color:#fff;padding:20px 20px 4px}
+.admin-logo span{color:var(--gold)}
+.admin-side .tag{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8fa593;padding:0 20px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.admin-nav{padding:12px 10px;display:grid;gap:3px}
+.admin-nav a{display:flex;align-items:center;gap:11px;color:#cdd8c9;padding:11px 13px;border-radius:8px;font-size:14px}
+.admin-nav a:hover{background:rgba(255,255,255,.06);color:#fff}
+.admin-nav a.on{background:var(--brand-700);color:#fff}
+.admin-side .foot{margin-top:auto;padding:16px 20px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:#8fa593}
+.admin-side .foot a{color:var(--gold)}
+.admin-main{display:flex;flex-direction:column;min-width:0}
+.admin-top{background:var(--ivory);border-bottom:1px solid var(--line);padding:13px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}
+.admin-top input{flex:1;max-width:380px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;font-family:var(--sans)}
+.admin-top .sp{flex:1}
+.chip-demo{background:var(--gold);color:var(--brand-900);font-size:11px;font-weight:600;letter-spacing:.05em;padding:5px 10px;border-radius:20px}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--brand-700);color:#fff;display:grid;place-items:center;font-weight:600}
+.admin-content{padding:24px;max-width:1180px;width:100%}
+.adm-h{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.adm-h h1{font-size:30px;color:var(--brand-900)}
+.adm-h p{color:var(--muted);margin:4px 0 0}
+.adm-btn{display:inline-flex;align-items:center;gap:.5em;background:var(--brand-800);color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:500}
+.adm-btn.o{background:#fff;color:var(--brand-800);border:1px solid var(--line)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
+.kpi{background:var(--ivory);border:1px solid var(--line);border-radius:12px;padding:16px}
+.kpi .l{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-family:var(--serif);font-size:32px;color:var(--brand-900);margin:4px 0}
+.adm-2{display:grid;grid-template-columns:1.6fr 1fr;gap:15px}
+.adm-box{background:var(--ivory);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:15px}
+.adm-box h3{font-size:19px;color:var(--brand-900);margin-bottom:12px}
+.chart{display:flex;align-items:flex-end;gap:10px;height:150px}
+.chart .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end}
+.chart .bar{width:66%;background:linear-gradient(var(--brand-700),var(--brand-900));border-radius:5px 5px 0 0}
+.chart .cap{font-size:11px;color:var(--muted)}
+.stat3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat3 .s{border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.stat3 .n{font-family:var(--serif);font-size:24px;color:var(--brand-900)}
+.stat3 .t{font-size:11px;color:var(--muted)}
+.alert{display:flex;gap:10px;background:#fbf1dd;border:1px solid #f0dcae;color:var(--gold-ink);border-radius:10px;padding:11px 13px;margin-bottom:9px;font-size:13px}
+.up{display:flex;gap:11px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.up .d{width:48px;text-align:center;font-family:var(--serif);color:var(--gold-ink)}
+.up .d b{display:block;font-size:19px}
+.up .w b{color:var(--brand-900)}.up .w div{font-size:12px;color:var(--muted)}
+.tablewrap{background:var(--ivory);border:1px solid var(--line);border-radius:12px;overflow:auto}
+table.adm{width:100%;border-collapse:collapse;min-width:760px}
+table.adm th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:13px 15px;border-bottom:1px solid var(--line);background:#faf7ef}
+table.adm td{padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:middle}
+table.adm tr:last-child td{border-bottom:none}
+table.adm tr:hover td{background:#faf8f1}
+.oid{font-weight:500;color:var(--brand-900)}
+.tools{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:15px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 14px;font-size:13px;color:var(--ink)}
+.chip.on{background:var(--brand-800);color:#fff;border-color:var(--brand-800)}
+.stsel{border:1px solid var(--line);border-radius:8px;padding:6px 9px;background:#fff;font-size:12.5px;color:var(--ink)}
+.iconbtn2{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 9px;color:var(--muted)}
+.iconbtn2:hover{color:var(--brand-800);border-color:var(--brand-800)}
+.prodcell{display:flex;align-items:center;gap:11px}
+.prodcell .im{width:44px;height:44px;border-radius:8px;overflow:hidden;background:#eadfce;flex:none;position:relative}
+.toggle{width:42px;height:24px;border-radius:20px;background:#d7d0c0;position:relative;border:none;transition:.2s}
+.toggle.on{background:var(--brand-700)}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s}
+.toggle.on::after{left:21px}
+.admin-hamb{display:none}
+.auth-required{min-height:100vh;display:grid;place-items:center;background:linear-gradient(120deg,var(--brand-900),var(--brand-700));padding:24px}
+.auth-card{background:var(--ivory);border-radius:16px;padding:34px;max-width:420px;text-align:center}
+@media(max-width:900px){
+  .admin{grid-template-columns:1fr}
+  .admin-side{position:fixed;left:0;top:0;width:248px;z-index:50;transform:translateX(-100%);transition:.3s}
+  .admin-side.on{transform:none}
+  .admin-hamb{display:inline-grid;place-items:center;border:1px solid var(--line);background:#fff;border-radius:8px;width:40px;height:40px}
+  .kpis{grid-template-columns:1fr 1fr}
+  .adm-2{grid-template-columns:1fr}
+}
